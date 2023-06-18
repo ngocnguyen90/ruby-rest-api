@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_05_25_021022) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.string "jti"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "exp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021022) do
   create_table "cryptos", force: :cascade do |t|
     t.string "name", null: false
     t.float "price", null: false
-    t.integer "crypto_type_id"
-    t.integer "user_id"
+    t.bigint "crypto_type_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crypto_type_id"], name: "index_cryptos_on_crypto_type_id"
@@ -40,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021022) do
 
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "crypted_token"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crypted_token"], name: "index_refresh_tokens_on_crypted_token", unique: true
@@ -57,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021022) do
 
   create_table "whitelisted_tokens", force: :cascade do |t|
     t.string "jti"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "exp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

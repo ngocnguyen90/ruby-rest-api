@@ -9,12 +9,12 @@ gem('active_model_serializers')
 gem('bcrypt', '~> 3.1.7')
 gem('bootsnap')
 gem('jwt', '~> 2.1.0')
+gem('postgresql')
 gem('puma', '~> 5.6.4')
 gem('rack-attack')
 gem('rack-cors')
 gem('rails', '~> 7.0.4', '>= 7.0.4.3')
 gem('rubocop')
-gem('sqlite3')
 gem('will_paginate', '~> 3.3')
 
 group :development, :test do

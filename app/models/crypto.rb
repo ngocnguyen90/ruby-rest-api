@@ -17,7 +17,7 @@ class Crypto < ApplicationRecord
       ).references(:crypto_type)
     else
       Crypto.includes(:crypto_type).select('cryptos.id, cryptos.name, cryptos.price, crypto_types.name as crypto_type_name, crypto_type_id').where('cryptos.name LIKE :query
-        or cryptos.price LIKE :query or crypto_types.name LIKE :query', query: "%#{query}%").references(:crypto_type)
+        or cast(cryptos.price as text) LIKE :query or crypto_types.name LIKE :query', query: "%#{query}%").references(:crypto_type)
     end
   end
 end

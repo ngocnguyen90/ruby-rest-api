@@ -137,6 +137,9 @@ GEM
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)
+    pg (1.5.3)
+    postgresql (1.0.0)
+      pg
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.2)
@@ -221,7 +224,6 @@ GEM
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
-    sqlite3 (1.6.3-x86_64-darwin)
     thor (1.2.2)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -251,6 +253,7 @@ DEPENDENCIES
   faker
   jwt (~> 2.1.0)
   listen (~> 3.8.0)
+  postgresql
   puma (~> 5.6.4)
   rack-attack
   rack-cors
@@ -263,7 +266,6 @@ DEPENDENCIES
   simple_command (~> 0.1.0)
   spring
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   tzinfo-data
   web-console (~> 3.7.0)
   will_paginate (~> 3.3)
