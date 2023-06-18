@@ -3,7 +3,7 @@ require './lib/jwt/jwt_service'
 
 RSpec.describe Jwt::JwtService do
   before :all do
-    @user = create(:user)
+    @user = create(:user, :with_token)
   end
   describe 'JwtService' do
     context 'encode' do
@@ -20,7 +20,7 @@ RSpec.describe Jwt::JwtService do
         access_token, _jti, _exp = Jwt::JwtService.encode(@user)
         user_infor = Jwt::JwtService.decode(access_token)
         expect(user_infor).to include(:user_id, :jti, :iat, :exp, :email)
-        expect(user_infor[:user_id]).to eq 1
+        expect(user_infor[:user_id]).to eq @user.id
       end
 
       it 'return nil on invalid token' do

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Api::V1::Cryptos', type: :request do
   before :all do
     @user = create(:user, :with_crypto)
+    @crypto_type = create(:crypto_type)
   end
 
   describe 'GET /index' do
@@ -45,7 +46,7 @@ RSpec.describe 'Api::V1::Cryptos', type: :request do
         login(@user)
         params = {
           'name': 'EDU',
-          'crypto_type_id': 1,
+          'crypto_type_id': @crypto_type[:id],
           'user_id': @user.id,
           'price': 200
         }
@@ -61,7 +62,7 @@ RSpec.describe 'Api::V1::Cryptos', type: :request do
         login(@user)
         params = {
           'name': nil,
-          'crypto_type_id': 1,
+          'crypto_type_id': @crypto_type[:id],
           'user_id': @user.id,
           'price': 200
         }
@@ -79,7 +80,7 @@ RSpec.describe 'Api::V1::Cryptos', type: :request do
         login(@user)
         params = {
           'name': 'EDU',
-          'crypto_type_id': 1,
+          'crypto_type_id': @crypto_type[:id],
           'user_id': @user.id,
           'price': 200
         }
@@ -95,7 +96,7 @@ RSpec.describe 'Api::V1::Cryptos', type: :request do
         login(@user)
         params = {
           'name': nil,
-          'crypto_type_id': 1,
+          'crypto_type_id': @crypto_type[:id],
           'user_id': @user.id,
           'price': 200
         }
@@ -113,7 +114,7 @@ RSpec.describe 'Api::V1::Cryptos', type: :request do
         login(@user)
         params = {
           'name': 'PEPE',
-          'crypto_type_id': 2,
+          'crypto_type_id': @crypto_type[:id],
           'price': 4000
         }
         put '/api/v1/cryptos/1', params: params, as: :json
@@ -128,21 +129,21 @@ RSpec.describe 'Api::V1::Cryptos', type: :request do
         login(@user)
         params = {
           'name': 'PEPE',
-          'crypto_type_id': 3,
+          'crypto_type_id': 9999,
           'price': nil
         }
         put '/api/v1/cryptos/1', params: params, as: :json
 
         expect(response).to have_http_status(400)
         expect(response_body[:crypto_type]).to eq ['must exist']
-        expect(response_body[:price]).to eq ["can't be blank"]
+        expect(response_body[:price]).to eq ["can't be blank", 'is not a number']
       end
 
       it 'return error if crypto id does not blank' do
         login(@user)
         params = {
           'name': 'PEPE',
-          'crypto_type_id': 2,
+          'crypto_type_id': @crypto_type[:id],
           'price': 4000
         }
         put '/api/v1/cryptos/9999', params: params, as: :json

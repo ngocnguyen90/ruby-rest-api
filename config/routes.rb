@@ -7,7 +7,10 @@ Rails.application.routes.draw do
       post 'users/login' => 'users#login'
       get 'users/logout', to: 'users#logout'
       post 'users/refresh' => 'users#refresh'
-      delete 'cryptos/delete/multiple', to: 'cryptos#destroy_multiple'
+      get 'users/theme', to: 'themes#show'
+      post 'users/theme/update' => 'themes#update'
+
+      post 'cryptos/delete/multiple', to: 'cryptos#destroy_multiple'
 
       resources :cryptos
       resources :crypto_types

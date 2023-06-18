@@ -44,6 +44,7 @@ module RubyRestApi
     end
 
     config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join('uploaders')
     config.autoload_paths << Rails.root.join('config/initializers')
   end
 end

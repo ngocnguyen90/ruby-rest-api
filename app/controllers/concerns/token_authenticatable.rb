@@ -10,7 +10,6 @@ module TokenAuthenticatable
   private
 
   def authenticate_request
-    puts request.headers.inspect
     result = Authentication::AuthorizeApiRequest.call(
       request.headers,
       params[:access_token]

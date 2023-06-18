@@ -92,7 +92,7 @@ end
 
 describe 'Post /refresh' do
   before :all do
-    @user = create(:user)
+    @user = create(:user, :with_token)
     post '/api/v1/users/login',
          params: { email: 'admin@gmail.com', password: 'admin123' }, as: :json
     @login_infor = response_body
